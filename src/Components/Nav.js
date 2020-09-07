@@ -1,10 +1,10 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import { Layout, Menu } from 'antd';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { UploadOutlined, UserOutlined, VideoCameraOutlined, HomeOutlined } from '@ant-design/icons';
 
 
-const { Header, Sider } = Layout;
+const { Sider } = Layout;
 
 function Nav() {
     return (
@@ -18,10 +18,15 @@ function Nav() {
                     console.log(collapsed, type);
                 }}
             >
-                <div className="logo" />
+                <div className="logo">
+                    <Link to="/">
+                        <HomeOutlined/>
+                    </Link>
+                    
+                </div>
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
                     <Menu.Item key="1" icon={<UserOutlined />}>
-                        <Link to="/signin">Sign In</Link>
+                        <Link to="/signUp">Registrate</Link>
                     </Menu.Item>
                     <Menu.Item key="2" icon={<VideoCameraOutlined />}>
                         <Link to="/eventos">Eventos disponibles</Link>
