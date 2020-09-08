@@ -12,6 +12,9 @@ import {
   Button,
   AutoComplete,
 } from 'antd';
+import { createUserWithEmailAndPassword } from "../Providers/Firebase"
+
+
 
     const { Option } = Select;
     
@@ -53,12 +56,48 @@ import {
         },
       };
     
+      const [ state, setState ] = useState(
+        {
+          firstName:"",
+          lastName: "",
+          email: "",
+          password: "",
+          repeat_password: ""
+        }
+      )
+
+
 
       const RegistrationForm = () => {
         const [form] = Form.useForm();
       
         const onFinish = values => {
           console.log('Received values of form: ', values);
+          validateFields = async (values) =>  {
+            if (!error) {
+              if (password !== confirm) {
+                alert("Las contraseñas no coinciden")
+                return
+              }
+
+              try {
+                const authorizedUser = await createUserWithEmailAndPassword(email, password)
+                const userRef = await firebase.user(authorizedUser.user.uid)
+
+                await userRef.set({
+                  email,
+                  empresa,
+                  prefix,
+                  phone,
+                  agreement
+                })
+              } catch (error) {
+                setState({error})
+                alert(error)
+              }
+
+            }
+          }
         };
       
         const prefixSelector = (

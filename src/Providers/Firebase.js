@@ -14,6 +14,28 @@ const firebaseConfig = {
 }
 
 function Firebase() {
+
+    const auth = app.auth()
+    const db = app.firestore()
+    const storage = app.storage()
+
+    /** Auth related functions */
+
+    const createUserWithEmailAndPassword = async (email, password) => 
+    auth.createUserWithEmailAndPassword(email, password);
+
+    const signInWithEmailAndPassword = async (email, password) => 
+    auth.signInWithEmailAndPassword(email, password);
+
+    const signOut = () => auth.signOut();
+
+    const passwordReset = async (email) => auth.sendPasswordResetEmail(email);
+
+    const passwordUpdate = async (password) => auth.currentUser.updatePassword(password);
+
+    const currentUser = async () => auth.currentUser();
+
+
     return (
         <div>
 
